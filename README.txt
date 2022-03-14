@@ -16,6 +16,10 @@ class Person(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
 
+    site_page = ForeignKey(SitePage, on_delete=models.CASCADE, related_name='regions')
+
+    CASCADE: When the referenced object is deleted, also delete the objects that have references to it (when you remove a blog post for instance, you might want to delete comments as well). SQL equivalent: CASCADE.
+
 ------- Views -------------------------------------------------------------------------------
 
 Views act like a link between Model data and Templates 
@@ -26,7 +30,7 @@ eg.: room/1/ --> id = pk = 1
 views.py code:
 
 def home(request):
-    q = request.GET.get('q') if request.GET.get('q') != None else '' # TO UNDESTAND
+    q = request.GET.get('q') if request.GET.get('q') != None else '' 
     rooms = Room.objects.filter(
         Q(topic__name__icontains=q) |
         Q(name__icontains=q) |
@@ -35,6 +39,10 @@ def home(request):
         )  # query list of rooms 
     topics = Topic.objects.all()
     room_count = rooms.count()
+
+
+A context is a variable name -> variable value mapping that is passed to a template.
+
 
     context = {'rooms': rooms, 'topics': topics, 'room_count': room_count}
     return render(request, 'polls/home.html', context)
