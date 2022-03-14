@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div>
+    <form method="POST" action="" >
+        {% csrf_token %} {% comment %} The CSRF middleware and template tag provides easy-to-use protection against Cross Site Request Forgeries {% endcomment %}
+        {{form.as_p}}    
+        {% comment %} This form is in forms.py and RoomForm asks for all Room's attributes from Room model, creating the form with all fields {% endcomment %}
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+
+{% endblock content %}
