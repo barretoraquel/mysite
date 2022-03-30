@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>   
 <html>
 <head>
@@ -5,18 +6,22 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>MySite</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+
 </head>
 
-<body>
+<body class="bg-grey-lightest font-serif leading-normal tracking-normal">
     {% include 'navbar.html' %}
 
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
-        <li></li>{{ message }}
+        <li>{{ message }}</li>
         {% endfor %}
     </ul>
     {% endif %}
+
+    <img src="{% static 'images/Python.jpeg' %}" />
 
     {% block content %}
 
