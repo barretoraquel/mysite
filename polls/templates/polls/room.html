@@ -32,12 +32,15 @@
         </div>
 
         {% if request.user.is_authenticated %}
-        <div class="comment-form">
-            <form method="POST" action="">
-                {% csrf_token %}
-                <input type="text" name="body" placeholder="Add your message here" />
-            </form>
-        </div>
+            {% if request.user in participants %}
+            <div class="comment-form">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <input type="text" name="body" placeholder="Add your message here" />
+                    <input type="submit" name="send" value="Send" />
+                </form>
+            </div>
+            {% endif %}
         {% endif %}
     </div>
 
